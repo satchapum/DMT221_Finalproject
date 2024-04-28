@@ -1,7 +1,6 @@
 class MapCreate
 {
-  MapCreate()
-  {
+  MapCreate(){
     
   }
   

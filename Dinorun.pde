@@ -1,4 +1,7 @@
 boolean IsGameStart;
+
+//Dinosetting
+
 MapCreate mapCreate = new MapCreate();
 PlayerDino playerDino = new PlayerDino();
 
@@ -17,6 +20,7 @@ void draw(){
   
   else if(IsGameStart == true){
     mapCreate.drawMap();
+    playerDino.dinoDraw();
   }
 }
 
@@ -51,6 +55,11 @@ void mousePressed(){
 
 void keyPressed() {
   if (key==' ') {
-    
+    if(playerDino.IsJump == true){
+      return;
+    }
+    else{
+      playerDino.dinoJump();
+    }
   }
 }
