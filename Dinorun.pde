@@ -9,6 +9,7 @@ void setup(){
   background(255);
   size(800,600);
   
+  frameRate(60);
   IsGameStart = false;
 }
 
@@ -50,7 +51,6 @@ void mousePressed(){
   if(mouseX <= width/2 + 50 && mouseX >= width/2 - 50 && mouseY <= height/2 + 25 && mouseY >= height/2 - 25){
     IsGameStart = true;
   }
-
 }
 
 void keyPressed() {
