@@ -1,3 +1,4 @@
+PImage img;
 boolean IsGameStart;
 
 //Dinosetting
@@ -11,11 +12,12 @@ void setup(){
   
   frameRate(60);
   IsGameStart = false;
+  img = loadImage("dino1.png");
 }
 
 void draw(){
   background(255);
-  
+ 
   if(IsGameStart == false)
   mainmenuUI();
   

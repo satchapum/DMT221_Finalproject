@@ -25,9 +25,10 @@ class PlayerDino
   }
   
   void dinoDraw(){
-
     //DinoHere
-    rect(dinoX,dinoY,50,50);
+    imageMode(CENTER);
+    image(img, dinoX, dinoY,50,50);
+    //rect(dinoX,dinoY,50,50);
 
     //jump
     if(IsJump == true && timeCount <=timeTojump){
