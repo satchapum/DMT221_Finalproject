@@ -1,5 +1,8 @@
-PImage img;
+PImage imgDino_1;
+PImage imgDino_2;
 boolean IsGameStart;
+
+float playerScore;
 
 //Dinosetting
 
@@ -9,10 +12,11 @@ PlayerDino playerDino = new PlayerDino();
 void setup(){
   background(255);
   size(800,600);
-  
+  noSmooth();
   frameRate(60);
   IsGameStart = false;
-  img = loadImage("dino1.png");
+  imgDino_1 = loadImage("dino1.png");
+  imgDino_2 = loadImage("dino2.png");
 }
 
 void draw(){
@@ -22,6 +26,7 @@ void draw(){
   mainmenuUI();
   
   else if(IsGameStart == true){
+    playerScoreUpdate();
     mapCreate.drawMap();
     playerDino.dinoDraw();
   }
@@ -45,6 +50,15 @@ void inGameUI(){
   textSize(40);
   textAlign(CENTER);
   text("start",width/2,height/2+12.5);
+}
+
+void playerScoreUpdate(){
+  fill(0);
+  textSize(40);
+  textAlign(RIGHT);
+  text((int)playerScore, 780, 40);
+  
+  playerScore += 0.5;
 }
 
 void mousePressed(){

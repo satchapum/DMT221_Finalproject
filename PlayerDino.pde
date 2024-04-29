@@ -4,12 +4,16 @@ class PlayerDino
   float dinoY;
   float dinoYTemp;
   
+  
   //jumpSystem
   float timeCount;
   float maxTimeToJump;
   float timeTojump;
   float gravity;
   float tempGravity;
+  float dinoAnimationNumber;
+  float dinoAnimationNumbertarget;
+  float nuberPerOneFrame;
   boolean IsJump;
   
   PlayerDino(){
@@ -22,13 +26,27 @@ class PlayerDino
     tempGravity = gravity;
     timeCount = 0;
     timeTojump = 1;
+    dinoAnimationNumber = 0;
+    dinoAnimationNumbertarget = 1;
+
   }
   
   void dinoDraw(){
     //DinoHere
     imageMode(CENTER);
-    image(img, dinoX, dinoY,50,50);
-    //rect(dinoX,dinoY,50,50);
+    if(dinoAnimationNumber <= dinoAnimationNumbertarget/2){
+      image(imgDino_1, dinoX, dinoY,50,50);
+      dinoAnimationNumber += 0.075;
+    }
+    else if(dinoAnimationNumber <= dinoAnimationNumbertarget){
+      image(imgDino_2, dinoX, dinoY,50,50);
+      dinoAnimationNumber += 0.075;
+      if(dinoAnimationNumber > dinoAnimationNumbertarget){
+        dinoAnimationNumber = 0;
+      }
+    }
+
+
 
     //jump
     if(IsJump == true && timeCount <=timeTojump){
