@@ -39,7 +39,11 @@ class MapCreate
     if(randomGroundNumber == 0){
       strokeWeight(1);
       line(offsetX,height/2+150,offsetX+200,height/2+150);
+      imgCloud = loadImage("cloud.png");
+      image(imgCloud,offsetX,100,150,60);
       
+      imgcactus = loadImage("cactus.png");
+      image(imgcactus,offsetX+50,height/2+123,70,70);
       drawStone(offsetX);
     }
     else if(randomGroundNumber == 1){
@@ -49,7 +53,8 @@ class MapCreate
       line(offsetX+100,height/2+155,offsetX+102,height/2+155);
       line(offsetX+102,height/2+155,offsetX+107,height/2+150);
       line(offsetX+107,height/2+150,offsetX+200,height/2+150);
-      
+      imgCloud = loadImage("cloud.png");
+      image(imgCloud,offsetX+100,150,150,60);
       drawStone(offsetX);
     }
     else{
@@ -59,7 +64,6 @@ class MapCreate
       line(offsetX+100,height/2+145,offsetX+102,height/2+145);
       line(offsetX+102,height/2+145,offsetX+107,height/2+150);
       line(offsetX+107,height/2+150,offsetX+200,height/2+150);
-      
       drawStone(offsetX);
     }
   }
@@ -73,5 +77,6 @@ class MapCreate
     line(offsetX+120,height/2+163,offsetX+124,height/2+163);
     strokeWeight(1.4);
     line(offsetX+160,height/2+159,offsetX+164,height/2+159);
+    
   }
 }

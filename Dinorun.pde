@@ -6,6 +6,8 @@ color white;
 
 PImage imgDino_1;
 PImage imgDino_2;
+PImage imgCloud;
+PImage imgcactus;
 boolean IsGameStart;
 
 float playerScore;
@@ -50,7 +52,6 @@ void draw() {
 
 void checkSoundForJump() {
   float vol = analyzer.analyze();
-  ellipse(width/2, height/2, 10+vol*200, 10+vol*200);
   println(vol*(10^5));
   if (vol*(10^5) > 1f ) {
     if (playerDino.IsJump == true) {
