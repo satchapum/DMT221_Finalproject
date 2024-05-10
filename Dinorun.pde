@@ -1,7 +1,7 @@
-import ddf.minim.*;
+import processing.sound.*;
 
-Minim minim;
-AudioInput in;
+AudioIn in;
+Amplitude analyzer;
 color white;
 
 PImage imgDino_1;
@@ -17,9 +17,10 @@ PlayerDino playerDino = new PlayerDino();
 
 void setup() {
   //sound
-  minim = new Minim(this);
-  minim.debugOn();
-  in = minim.getLineIn(Minim.STEREO, 512);
+  in = new AudioIn(this,0);
+  in.start();
+  analyzer = new Amplitude(this);
+  analyzer.input(in);
   //
 
   background(255);
@@ -48,8 +49,10 @@ void draw() {
 }
 
 void checkSoundForJump() {
-  println(in.left.level()*(10^52));
-  if (in.left.level()*(10^52) > 1 ) {
+  float vol = analyzer.analyze();
+  ellipse(width/2, height/2, 10+vol*200, 10+vol*200);
+  println(vol*(10^5));
+  if (vol*(10^5) > 1f ) {
     if (playerDino.IsJump == true) {
       return;
     } else {
@@ -98,9 +101,11 @@ void mousePressed() {
 void stop()
 {
   // always close Minim audio classes when you are done with them
-  in.close();
-  minim.stop();
-  super.stop();
+  //in.close();
+  //minim.stop();
+  //super.stop();
+  
+  in.stop();
 }
 
 void keyPressed() {
