@@ -76,7 +76,7 @@ void checkDinoColliderHitTheObstacle(){
     
     if(playerDino.dinoX >= (currentObstacle.x-(currentObstacle.sizeX/2)) && playerDino.dinoX <= (currentObstacle.x+(currentObstacle.sizeX/2)) 
     && playerDino.dinoY >= (currentObstacle.y-(currentObstacle.sizeY/2)) && playerDino.dinoY <= (currentObstacle.y+(currentObstacle.sizeY/2))){
-      println("hit");
+      //println("hit");
       if(playerScore > playerBestScore){
         playerBestScore = playerScore;
       }

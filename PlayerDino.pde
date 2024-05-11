@@ -22,7 +22,7 @@ class PlayerDino
     dinoY = 425;
     dinoYTemp = dinoY;
 
-    gravity = 5;
+    gravity = 4;
     tempGravity = gravity;
     timeCount = 0;
     timeTojump = 1;
@@ -50,8 +50,8 @@ class PlayerDino
 
     //jump
     if(IsJump == true && timeCount <=timeTojump){
-      println(timeCount);
-      println(maxTimeToJump);
+      //println(timeCount);
+      //println(maxTimeToJump);
       dinoY -= 3;
       gravity -= 0.25;
       timeCount += 0.04;

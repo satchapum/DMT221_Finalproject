@@ -9,7 +9,7 @@ class Obstacle
   boolean isBird;
   
   float animationOfBird;
-  
+  float birdAnimationNumbertarget;
   Obstacle(float _y,float size_X, float size_Y, boolean cactus, boolean bird){
     sizeX = size_X;
     sizeY = size_Y;
@@ -18,6 +18,8 @@ class Obstacle
     
     x = width+20;
     y = _y;
+    animationOfBird = 0;
+    birdAnimationNumbertarget = 1;
   }
   void drawObstacle(){
     imageMode(CENTER);
@@ -25,7 +27,17 @@ class Obstacle
       image(imgcactus, x, y,sizeX,sizeY);
     }
     else if(isBird == true){
-      image(imgBird_1, x, y,sizeX,sizeY);
+      if(animationOfBird <= birdAnimationNumbertarget/2){
+        image(imgBird_1, x, y,sizeX,sizeY);
+        animationOfBird += 0.075;
+      }
+      else if(animationOfBird <= birdAnimationNumbertarget){
+        image(imgBird_2, x, y,sizeX,sizeY);
+        animationOfBird += 0.075;
+        if(animationOfBird > birdAnimationNumbertarget){
+          animationOfBird = 0;
+        }
+      }
     }
   }
   
