@@ -12,12 +12,18 @@ boolean IsGameStart;
 
 float playerScore;
 
+float currentTime;
+float timeToCreateObstacle;
 //Dinosetting
 
 MapCreate mapCreate = new MapCreate();
 PlayerDino playerDino = new PlayerDino();
 
 void setup() {
+  //obstacle
+  currentTime = 0;
+  timeToCreateObstacle = 2;
+  //
   //sound
   in = new AudioIn(this,0);
   in.start();
@@ -46,13 +52,24 @@ void draw() {
     playerScoreUpdate();
     mapCreate.drawMap();
     playerDino.dinoDraw();
+    
+    currentTime += 1/60f; //60 frame in 1 sec
+    println(currentTime);
+    if(currentTime >= timeToCreateObstacle){
+      //createhere
+      currentTime = 0;
+    }
   }
 
 }
 
+void createObstacle(){
+  
+}
+
 void checkSoundForJump() {
   float vol = analyzer.analyze();
-  println(vol*(10^5));
+  //println(vol*(10^5));
   if (vol*(10^5) > 1f ) {
     if (playerDino.IsJump == true) {
       return;
