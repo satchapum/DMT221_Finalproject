@@ -79,4 +79,5 @@ class MapCreate
     line(offsetX+160,height/2+159,offsetX+164,height/2+159);
     
   }
+
 }

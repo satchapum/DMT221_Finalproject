@@ -8,6 +8,8 @@ class Obstacle
   boolean isCactus;
   boolean isBird;
   
+  float animationOfBird;
+  
   Obstacle(float _y,float size_X, float size_Y, boolean cactus, boolean bird){
     sizeX = size_X;
     sizeY = size_Y;

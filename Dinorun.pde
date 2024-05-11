@@ -13,6 +13,7 @@ PImage imgBird_2;
 boolean IsGameStart;
 
 float playerScore;
+float playerBestScore;
 
 float currentTime;
 float timeToCreateObstacle;
@@ -45,6 +46,8 @@ void setup() {
   imgcactus = loadImage("cactus.png");
   imgBird_1 = loadImage("bird1.png");
   imgBird_2 = loadImage("bird2.png");
+  
+  playerBestScore = 0;
 }
 
 void draw() {
@@ -52,9 +55,9 @@ void draw() {
 
   checkSoundForJump();
 
-  if (IsGameStart == false)
+  if (IsGameStart == false){ 
     mainmenuUI();
-
+  }
   else if (IsGameStart == true) {
     playerScoreUpdate();
     mapCreate.drawMap();
@@ -62,8 +65,33 @@ void draw() {
     
     checkTimeToCreateObstacle();
     moveObstacle();
+    checkDinoColliderHitTheObstacle();
   }
 
+}
+
+void checkDinoColliderHitTheObstacle(){
+  for(int numberOfObstacle = 0; numberOfObstacle < obstacle.size() ; numberOfObstacle++){
+    Obstacle currentObstacle = obstacle.get(numberOfObstacle);
+    
+    if(playerDino.dinoX >= (currentObstacle.x-(currentObstacle.sizeX/2)) && playerDino.dinoX <= (currentObstacle.x+(currentObstacle.sizeX/2)) 
+    && playerDino.dinoY >= (currentObstacle.y-(currentObstacle.sizeY/2)) && playerDino.dinoY <= (currentObstacle.y+(currentObstacle.sizeY/2))){
+      println("hit");
+      if(playerScore > playerBestScore){
+        playerBestScore = playerScore;
+      }
+      playerScore = 0;
+      playerDino.dinoY = 425;
+      deleteAllObstacle();
+      IsGameStart = false;
+    }
+  }
+}
+
+void deleteAllObstacle(){
+  for(int numberOfObstacle = obstacle.size()-1; numberOfObstacle >= 0 ; numberOfObstacle--){
+    obstacle.remove(numberOfObstacle);
+  }
 }
 
 void checkTimeToCreateObstacle(){
@@ -88,11 +116,12 @@ void createObstacle(){
 }
 
 void moveObstacle(){
-  println(obstacle.size()-1);
+  //println(obstacle.size()-1);
   for(int numberOfObstacle = obstacle.size()-1; numberOfObstacle >= 0 ; numberOfObstacle--){
     Obstacle currentObstacle = obstacle.get(numberOfObstacle);
     currentObstacle.drawObstacle();
     currentObstacle.moveObstacle();
+    
     if(currentObstacle.x <= -20){
       obstacle.remove(numberOfObstacle);
     }
@@ -119,6 +148,8 @@ void mainmenuUI() {
   textSize(40);
   textAlign(CENTER);
   text("start", width/2, height/2+12.5);
+  
+  text("Your Best Score : " + (int)playerBestScore, width/2, height/2+120);
 }
 
 void inGameUI() {
