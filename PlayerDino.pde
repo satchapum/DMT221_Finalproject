@@ -22,7 +22,7 @@ class PlayerDino
     dinoY = 425;
     dinoYTemp = dinoY;
 
-    gravity = 3;
+    gravity = 5;
     tempGravity = gravity;
     timeCount = 0;
     timeTojump = 1;

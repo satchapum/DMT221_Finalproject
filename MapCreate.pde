@@ -42,8 +42,8 @@ class MapCreate
       imgCloud = loadImage("cloud.png");
       image(imgCloud,offsetX,100,150,60);
       
-      imgcactus = loadImage("cactus.png");
-      image(imgcactus,offsetX+50,height/2+123,70,70);
+      //image(imgcactus,offsetX+50,height/2+123,70,70);
+      
       drawStone(offsetX);
     }
     else if(randomGroundNumber == 1){

@@ -8,6 +8,8 @@ PImage imgDino_1;
 PImage imgDino_2;
 PImage imgCloud;
 PImage imgcactus;
+PImage imgBird_1;
+PImage imgBird_2;
 boolean IsGameStart;
 
 float playerScore;
@@ -18,6 +20,7 @@ float timeToCreateObstacle;
 
 MapCreate mapCreate = new MapCreate();
 PlayerDino playerDino = new PlayerDino();
+ArrayList<Obstacle> obstacle = new ArrayList<Obstacle>();
 
 void setup() {
   //obstacle
@@ -36,8 +39,12 @@ void setup() {
   noSmooth();
   frameRate(60);
   IsGameStart = false;
+  
   imgDino_1 = loadImage("dino1.png");
   imgDino_2 = loadImage("dino2.png");
+  imgcactus = loadImage("cactus.png");
+  imgBird_1 = loadImage("bird1.png");
+  imgBird_2 = loadImage("bird2.png");
 }
 
 void draw() {
@@ -53,18 +60,43 @@ void draw() {
     mapCreate.drawMap();
     playerDino.dinoDraw();
     
-    currentTime += 1/60f; //60 frame in 1 sec
-    println(currentTime);
-    if(currentTime >= timeToCreateObstacle){
-      //createhere
-      currentTime = 0;
-    }
+    checkTimeToCreateObstacle();
+    moveObstacle();
   }
 
 }
 
+void checkTimeToCreateObstacle(){
+  currentTime += 1/60f; //60 frame in 1 sec
+  if(currentTime >= timeToCreateObstacle){
+    createObstacle();
+    currentTime = 0;
+  }
+}
+
 void createObstacle(){
+  float typeOfObstacle = random(1,5);
   
+  //Cactus vvvv
+  if((int)typeOfObstacle == 1 || (int)typeOfObstacle == 2 || (int)typeOfObstacle == 3){
+    obstacle.add(new Obstacle(height/2+123, 70, 70, true, false));
+  }
+  //Bird vvvv
+  else if((int)typeOfObstacle == 4){
+    obstacle.add(new Obstacle(330, 80, 60, false, true));
+  }
+}
+
+void moveObstacle(){
+  println(obstacle.size()-1);
+  for(int numberOfObstacle = obstacle.size()-1; numberOfObstacle >= 0 ; numberOfObstacle--){
+    Obstacle currentObstacle = obstacle.get(numberOfObstacle);
+    currentObstacle.drawObstacle();
+    currentObstacle.moveObstacle();
+    if(currentObstacle.x <= -20){
+      obstacle.remove(numberOfObstacle);
+    }
+  }
 }
 
 void checkSoundForJump() {
@@ -114,16 +146,6 @@ void mousePressed() {
   if (mouseX <= width/2 + 50 && mouseX >= width/2 - 50 && mouseY <= height/2 + 25 && mouseY >= height/2 - 25) {
     IsGameStart = true;
   }
-}
-
-void stop()
-{
-  // always close Minim audio classes when you are done with them
-  //in.close();
-  //minim.stop();
-  //super.stop();
-  
-  in.stop();
 }
 
 void keyPressed() {
