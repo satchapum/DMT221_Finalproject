@@ -2,6 +2,10 @@ import processing.sound.*;
 
 AudioIn in;
 Amplitude analyzer;
+SoundFile dinojump;
+SoundFile dinobump;
+
+PFont font1;
 color white;
 
 PImage imgDino_1;
@@ -10,6 +14,7 @@ PImage imgCloud;
 PImage imgcactus;
 PImage imgBird_1;
 PImage imgBird_2;
+PImage imgLOGO;
 boolean IsGameStart;
 
 float playerScore;
@@ -33,6 +38,12 @@ void setup() {
   in.start();
   analyzer = new Amplitude(this);
   analyzer.input(in);
+  dinojump = new SoundFile(this, "jump.wav");
+  dinobump = new SoundFile(this, "bump.wav");
+  
+  font1 = createFont("DePixelKlein.otf", 32);
+  textFont(font1);
+ 
   //
 
   background(255);
@@ -77,6 +88,9 @@ void checkDinoColliderHitTheObstacle(){
     if(playerDino.dinoX >= (currentObstacle.x-(currentObstacle.sizeX/2)) && playerDino.dinoX <= (currentObstacle.x+(currentObstacle.sizeX/2)) 
     && playerDino.dinoY >= (currentObstacle.y-(currentObstacle.sizeY/2)) && playerDino.dinoY <= (currentObstacle.y+(currentObstacle.sizeY/2))){
       //println("hit");
+       if (!dinobump.isPlaying()){
+      dinobump.play();
+      
       if(playerScore > playerBestScore){
         playerBestScore = playerScore;
       }
@@ -84,6 +98,7 @@ void checkDinoColliderHitTheObstacle(){
       playerDino.dinoY = 425;
       deleteAllObstacle();
       IsGameStart = false;
+      }
     }
   }
 }
@@ -143,23 +158,26 @@ void checkSoundForJump() {
 void mainmenuUI() {
   fill(255);
   rectMode(CENTER);
-  rect(width/2, height/2, 100, 50);
-  fill(0);
-  textSize(40);
+  rect(width/2, height/2+100, 100, 50);
+  fill(#535353);
+  textSize(32);
   textAlign(CENTER);
-  text("start", width/2, height/2+12.5);
-  
-  text("Your Best Score : " + (int)playerBestScore, width/2, height/2+120);
+  text("start", width/2, height/2+112.5);
+  imgLOGO = loadImage("LOGO.png");
+  imageMode(CENTER);
+  image(imgLOGO,400,250,522,340);
+  textSize(18);
+  text("Your Best Score : " + (int)playerBestScore, width/2+280, height/2+280);
 }
 
 void inGameUI() {
   fill(255);
   rectMode(CENTER);
-  rect(width/2, height/2, 100, 50);
+  rect(width/2, height/2+100, 100, 50);
   fill(0);
   textSize(40);
   textAlign(CENTER);
-  text("start", width/2, height/2+12.5);
+  text("start", width/2, height/2+112.5);
 }
 
 void playerScoreUpdate() {
@@ -167,14 +185,14 @@ void playerScoreUpdate() {
   textSize(40);
   textAlign(RIGHT);
   text((int)playerScore, 780, 40);
-
+  
   playerScore += 0.5;
 }
 
 void mousePressed() {
 
   //startbutton
-  if (mouseX <= width/2 + 50 && mouseX >= width/2 - 50 && mouseY <= height/2 + 25 && mouseY >= height/2 - 25) {
+  if (mouseX <= width/2 + 50 && mouseX >= width/2 - 50 && mouseY <= height/2 + 128 && mouseY >= height/2 + 73) {
     IsGameStart = true;
   }
 }

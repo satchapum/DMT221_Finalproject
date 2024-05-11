@@ -55,6 +55,9 @@ class PlayerDino
       dinoY -= 3;
       gravity -= 0.25;
       timeCount += 0.04;
+      if (!dinojump.isPlaying()){
+      dinojump.play();
+      }
     }
     else if(timeCount > timeTojump){
       dinoY += gravity;
