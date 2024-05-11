@@ -42,6 +42,12 @@ class Obstacle
   }
   
   void moveObstacle(){
-    x -= 3;
+    if(isCactus == true){
+      x -= 3;
+    }
+    else if(isBird == true){
+      x -= 9;
+    }
+
   }
 }

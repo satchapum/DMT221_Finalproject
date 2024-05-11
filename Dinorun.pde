@@ -22,6 +22,8 @@ float playerBestScore;
 
 float currentTime;
 float timeToCreateObstacle;
+
+color mainMenuButton;
 //Dinosetting
 
 MapCreate mapCreate = new MapCreate();
@@ -63,7 +65,14 @@ void setup() {
 
 void draw() {
   background(255);
-
+  
+  if (mouseX <= width/2 + 50 && mouseX >= width/2 - 50 && mouseY <= height/2 + 128 && mouseY >= height/2 + 73) {
+    mainMenuButton = color(#C6C6C6);
+  }
+  else{
+    mainMenuButton = color(#FFFFFF);
+  }
+  
   checkSoundForJump();
 
   if (IsGameStart == false){ 
@@ -156,7 +165,7 @@ void checkSoundForJump() {
 }
 
 void mainmenuUI() {
-  fill(255);
+  fill(mainMenuButton);
   rectMode(CENTER);
   rect(width/2, height/2+100, 100, 50);
   fill(#535353);
